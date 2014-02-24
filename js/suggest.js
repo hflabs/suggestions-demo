@@ -75,12 +75,14 @@
          */
         formatResult: function (suggestion, currentValue) {
             var address = suggestion.data;
-            // первая строка - регион
-            var part1 = address.region;
-            // вторая строка - район, город, населенный пункт, улица и дом
-            var part2 = join([
+            // первая строка - регион, район, город
+            var part1 = join([
+                address.region,
                 join([address.area_type, address.area], " "),
-                join([address.city_type, address.city], " "),
+                join([address.city_type, address.city], " ")
+            ]);
+            // вторая строка - населенный пункт, улица и дом
+            var part2 = join([
                 join([address.settlement_type, address.settlement], " "),
                 join([address.street_type, address.street], " "),
                 join([address.house_type, address.house], " ")
