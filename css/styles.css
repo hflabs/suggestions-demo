@@ -57,6 +57,9 @@
         border-color: #ccc;
         box-shadow: none;
     }
+    input#address-flat {
+        border: 1px solid #ccc;
+    }
 
 /* Маркер для обязательных полей */
 .required {
