@@ -42,8 +42,8 @@
         },
 
         /**
-         * Ограничивает поиск конкретным Москвой
-         * @param params
+         * Ограничивает поиск Москвой
+         * @param params Параметры ajax-запроса
          */
         forceMoscow: function (params) {
             var query = params["query"];
@@ -75,17 +75,23 @@
          */
         formatResult: function (suggestion, currentValue) {
             var address = suggestion.data;
-            // первая строка - регион, город, населенный пункт
-            var part1 = join([address.region, address.area, address.city, address.settlement]);
-            // вторая строка - улица и дом
+            // первая строка - регион
+            var part1 = address.region;
+            // вторая строка - район, город, населенный пункт, улица и дом
             var part2 = join([
-                join([address.street_type, address.street], " "), 
+                join([address.area_type, address.area], " "),
+                join([address.city_type, address.city], " "),
+                join([address.settlement_type, address.settlement], " "),
+                join([address.street_type, address.street], " "),
                 join([address.house_type, address.house], " ")
             ]);
-            var suggestedValue = part2 ? part1 + "<br>&nbsp;&nbsp;" + part2 : part1;
             // подсветка введенного пользователем текста
             var pattern = '(^|\\s+)(' + $.Suggestions.utils.escapeRegExChars(currentValue) + ')';
-            return suggestedValue.replace(new RegExp(pattern, 'gi'), '$1<strong>$2<\/strong>');
+            part2 = part2.replace(new RegExp(pattern, 'gi'), '$1<strong>$2<\/strong>')
+            var suggestedValue = part2 ?
+                "<span class=\"autocomplete-suggestion-region\">" + part1 + "</span>" + "<br>&nbsp;&nbsp;" + part2
+                : part1;
+            return suggestedValue;
         },
 
         /**
@@ -113,12 +119,12 @@
         showSelected: function (suggestion) {
             var address = suggestion.data;
             $("#address-postal_code").val(address.postal_code);
-            $("#address-region").val(join([
-                join([address.region_type, address.region], " "), 
-                join([address.area_type, address.area], " ")
-            ]));
+            $("#address-region").val(
+                join([address.region_type, address.region], " ")
+            );
             $("#address-city").val(join([
-                join([address.city_type, address.city], " "), 
+                join([address.area_type, address.area], " "),
+                join([address.city_type, address.city], " "),
                 join([address.settlement_type, address.settlement], " ")
             ]));
             $("#address-street").val(
@@ -127,7 +133,7 @@
             $("#address-house").val(
                 join([address.house_type, address.house], " ")
             );
-        }
+        }  // любите работать с кодом? У нас есть отличные вакансии http://hh.ru/employer/15589!
     };
 
     /**
