@@ -44,8 +44,7 @@
         padding-top: 7px;
     }
     input.suggestion-editable {
-        border: none;
-        border-bottom: 1px dotted #ccc;
+        border: 1px dotted #ccc;
         border-radius: 0;
         box-shadow: none;
         padding-left: 4px;
@@ -57,9 +56,6 @@
     input.suggestion-editable:focus {
         border-color: #ccc;
         box-shadow: none;
-    }
-    input#address-flat {
-        border: 1px solid #ccc;
     }
 
 /* Маркер для обязательных полей */

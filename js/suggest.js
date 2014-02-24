@@ -14,16 +14,47 @@
     }
 
     /**
+     * Базовый объект подсказок
+     * Синхронизирует изменение гранулярных полей с полем "одной строкой"
+     * @type {{init: Function}}
+     */
+    var Suggestions = {
+        /**
+         * Инициализирует подсказки на указанном элементе
+         * @param $el   jQuery-элемент ввода одной строкой
+         * @param parts Массив jQuery-элементов для гранулярных частей
+         * @param separator Разделитель, через который нужно объединять гранулярные части
+         * @constructor
+         */
+        init: function($el, parts, separator) {
+            parts.forEach(function($part) {
+                $part.change(function() {
+                    var partialValues = parts.map(
+                        function($el) { return $el.val() }
+                    );
+                    $el.val(
+                        join(partialValues, separator)
+                    );
+                });
+            });
+        }
+    }
+
+    /**
      * Подскази по адресу
      * @type {{init: Function, forceMoscow: Function, trimResults: Function, formatResult: Function, formatSelected: Function, showSelected: Function}}
      */
     var AddressSuggestions = {
 
         /**
+         * Инициализирует подсказки по адресу на указанном элементе
+         * @param $el   jQuery-элемент ввода адреса одной строкой
+         * @param parts Массив jQuery-элементов для гранулярных частей адреса
          * @constructor
          */
-        init: function($el) {
+        init: function($el, parts) {
             var self = this;
+            Suggestions.init.call(self, $el, parts, ", ");
             $el.suggestions({
                 serviceUrl: DadataApi.DADATA_API_URL + "/suggest/address",
                 token: DadataApi.TOKEN,
@@ -145,10 +176,14 @@
     var FullnameSuggestions = {
 
         /**
+         * Инициализирует подсказки по ФИО на указанном элементе
+         * @param $el   jQuery-элемент ввода ФИО одной строкой
+         * @param parts Массив jQuery-элементов для гранулярных частей ФИО
          * @constructor
          */
-        init: function($el) {
+        init: function($el, parts) {
             var self = this;
+            Suggestions.init.call(self, $el, parts, " ");
             $el.suggestions({
                 serviceUrl: DadataApi.DADATA_API_URL + "/suggest/fio",
                 token: DadataApi.TOKEN,

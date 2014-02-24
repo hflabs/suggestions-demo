@@ -31,8 +31,14 @@
     }
 
     $(function() {
-        AddressSuggestions.init($("#address"));
-        FullnameSuggestions.init($("#fullname"));
+        AddressSuggestions.init(
+            $("#address"),
+            [$("#address-region"), $("#address-city"), $("#address-street"), $("#address-house")]
+        );
+        FullnameSuggestions.init(
+            $("#fullname"),
+            [$("#fullname-surname"), $("#fullname-name"), $("#fullname-patronymic")]
+        );
 
         var $form = $("#feedback-form");
         var $btnSubmit = $form.find("button[type='submit']");
