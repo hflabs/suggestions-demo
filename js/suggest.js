@@ -152,6 +152,7 @@
             $el.suggestions({
                 serviceUrl: DadataApi.DADATA_API_URL + "/suggest/fio",
                 token: DadataApi.TOKEN,
+                autoSelectFirst: true,
                 selectOnSpace: true,
                 onSelect: function(suggestion) {
                     if (suggestion.data) {
