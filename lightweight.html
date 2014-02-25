@@ -25,23 +25,27 @@
 <body>
     <div class="container">
 
-        <div class="page-header">
-            <h1>Обращение в правительство Москвы</h1>
-            <p class="lead">Пожалуйста, укажите ваши контактные данные и суть вопроса</p>
-        </div>
+        <div class="row">
 
-        <form role="form" id="feedback-form">
+            <div class="col-xs-12 col-sm-10 col-md-6">
 
-            <div class="row">
+                <header>
+                    <h3>Обращение в правительство Москвы</h3>
+                    <p>Пожалуйста, укажите ваши контактные данные и суть вопроса</p>
+                </header>
 
-                <div class="col-xs-12 col-sm-10 col-md-6">
+                <hr>
 
+                <form role="form" id="feedback-form">
+
+                    <!-- Прогресс отправки формы -->
                     <div class="progress" style="display: none;">
                         <div id="feedback-progress" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0;">
                         <span class="sr-only"></span>
                         </div>
                     </div>
 
+                    <!-- Результат отправки формы -->
                     <div id="feedback-message" class="alert alert-danger fade in" style="display: none;">
                         <h4></h4>
                         <p data-message></p>
@@ -56,16 +60,16 @@
                         <input type="text" class="form-control" id="fullname" placeholder="ФИО в свободной форме" autofocus required>
                     </div>
 
-                    <!-- Телефон -->
-                    <div class="form-group">
-                        <label for="phone">Контактный телефон</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="+7 916 123-45-67">
-                    </div>
-
                     <!-- Email-->
                     <div class="form-group">
                         <label for="email">E-mail</label><span class="required">&nbsp;∗</span>
                         <input type="email" class="form-control" id="email" placeholder="me@example.com" required>
+                    </div>
+
+                    <!-- Телефон -->
+                    <div class="form-group">
+                        <label for="phone">Контактный телефон</label>
+                        <input type="tel" class="form-control" id="phone" placeholder="+7 916 123-45-67">
                     </div>
 
                     <!-- Адрес -->
@@ -87,13 +91,13 @@
                         <textarea class="form-control" id="message" rows="5" required></textarea>
                     </div>
 
-                </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Отправить обращение</button>
+
+                </form>
 
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg">Отправить обращение</button>
-
-        </form>
+        </div>
 
     </div>
 
