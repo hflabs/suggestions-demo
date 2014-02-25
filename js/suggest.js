@@ -61,7 +61,7 @@
                 selectOnSpace: true,
                 maxHeight: 310,
                 onSearchStart: self.forceMoscow,
-                onSearchComplete: self.trimResults,
+                transformResult: self.trimResults,
                 formatResult: self.formatResult,
                 onSelect: function(suggestion) {
                     if (suggestion.data) {
@@ -87,14 +87,14 @@
 
         /**
          * Фильтрует список подсказок
-         * @param query       Введенный пользователем текст
-         * @param suggestions Массив подсказок для введенного текста
+         * @param response Ответ от сервера подсказок
          */
-        trimResults: function (query, suggestions) {
-            suggestions.splice(7,3);
-            suggestions.forEach(function(suggestion) {
+        trimResults: function (response) {
+            response.suggestions.splice(7,3);
+            response.suggestions.forEach(function(suggestion) {
                 suggestion.value = suggestion.value.replace("Россия, ", "");
-            })
+            });
+            return response;
         },
 
         /**
