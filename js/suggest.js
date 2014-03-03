@@ -91,9 +91,6 @@
          */
         trimResults: function (response) {
             response.suggestions.splice(7,3);
-            response.suggestions.forEach(function(suggestion) {
-                suggestion.value = suggestion.value.replace("Россия, ", "");
-            });
             return response;
         },
 
@@ -105,6 +102,7 @@
          * @returns {string} HTML для элемента списка подсказок
          */
         formatResult: function (suggestion, currentValue) {
+            suggestion.value = suggestion.value.replace("Россия, ", "");
             var address = suggestion.data;
             // первая строка - регион, район, город
             var part1 = join([

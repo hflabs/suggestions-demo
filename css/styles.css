@@ -48,7 +48,8 @@
         border-bottom: 1px dotted #ccc;
         border-radius: 0;
         box-shadow: none;
-        padding-left: 4px;
+        padding-left: 0;
+        padding-right: 0;
     }
     input.suggestion-editable[readonly] {
         background-color: inherit;
@@ -60,6 +61,8 @@
     }
     input#address-flat {
         border: 1px solid #ccc;
+        padding-left: 4px;
+        padding-right: 4px;
     }
 
 /* Маркер для обязательных полей */

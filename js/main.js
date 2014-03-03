@@ -59,7 +59,7 @@
 
         $form.submit(function(e) {
             e.preventDefault();
-            $btnSubmit.attr("disabled","disabled");
+            $btnSubmit.hide();
             $message.hide();
             $progress.parent().show();
             var progressVal = 5;
@@ -75,7 +75,7 @@
                 } else {
                     $progress.parent().hide();
                     setProgress(0);
-                    $btnSubmit.removeAttr("disabled");
+                    $btnSubmit.show();
                     showSubmitMessage($message);
                 }
             };
