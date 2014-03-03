@@ -186,12 +186,22 @@
                 serviceUrl: DadataApi.DADATA_API_URL + "/suggest/fio",
                 token: DadataApi.TOKEN,
                 selectOnSpace: true,
+                transformResult: self.trimResults,
                 onSelect: function(suggestion) {
                     if (suggestion.data) {
                         self.showSelected(suggestion);
                     }
                 }
             });
+        },
+
+        /**
+         * Фильтрует список подсказок
+         * @param response Ответ от сервера подсказок
+         */
+        trimResults: function (response) {
+            response.suggestions.splice(7,3);
+            return response;
         },
 
         /**
