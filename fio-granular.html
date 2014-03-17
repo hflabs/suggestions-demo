@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Пример формы с гранулярными подсказками ФИО DaData.ru">
+    <meta name="author" content="algenon">
+
+    <title>Гранулярные подсказки ФИО</title>
+
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/bootstrap-3.1.1.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-10 col-md-6">
+
+                <header>
+                    <h3>Гранулярные подсказки ФИО</h3>
+                    <p>Фамилия, имя и отчество подсказываются по отдельности</p>
+                </header>
+
+                <hr>
+
+                <form role="form" id="feedback-form">
+
+                    <!-- ФИО -->
+                    <div class="form-group">
+                        <label for="surname">ФИО</label><span class="required">&nbsp;∗</span>
+                        <input type="text" class="form-control" id="fullname-surname" placeholder="Фамилия" autofocus required>
+
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fullname-name" placeholder="Имя" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fullname-patronymic" placeholder="Отчество">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg" disabled>Отправить обращение</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="js/jquery-1.11.0.min.js"></script>
+    <!--[if lt IE 10]>
+    <script src="js/jquery.xdomainrequest-1.0.1.min.js"></script>
+    <![endif]-->
+    <script src="js/suggestions-jquery-4.1.min.js"></script>
+    <script src="js/dadata.js"></script>
+    <script src="js/suggest.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

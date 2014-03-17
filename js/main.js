@@ -39,6 +39,9 @@
             $("#fullname"),
             [$("#fullname-surname"), $("#fullname-name"), $("#fullname-patronymic")]
         );
+        GranularFullnameSuggestions.init(
+            $("#fullname-surname"), $("#fullname-name"), $("#fullname-patronymic")
+        );
 
         var $form = $("#feedback-form");
         var $btnSubmit = $form.find("button[type='submit']");

@@ -16,7 +16,6 @@
     /**
      * Базовый объект подсказок
      * Синхронизирует изменение гранулярных полей с полем "одной строкой"
-     * @type {{init: Function}}
      */
     var Suggestions = {
         /**
@@ -38,11 +37,10 @@
                 });
             });
         }
-    }
+    };
 
     /**
      * Подскази по адресу
-     * @type {{init: Function, forceMoscow: Function, trimResults: Function, formatResult: Function, formatSelected: Function, showSelected: Function}}
      */
     var AddressSuggestions = {
 
@@ -169,7 +167,6 @@
 
     /**
      * Подсказки по ФИО
-     * @type {{init: Function, showSelected: Function}}
      */
     var FullnameSuggestions = {
 
@@ -216,7 +213,75 @@
         }
     };
 
+    /**
+     * Гранулярные подсказки по ФИО
+     */
+    var GranularFullnameSuggestions = {
+
+        /**
+         * Инициализирует подсказки по ФИО на указанном элементе
+         * @param $surname jQuery-элемент для текстового поля с фамилией
+         * @param $name jQuery-элемент для текстового поля с именем
+         * @param $patronymic jQuery-элемент для текстового поля с отчеством
+         * @constructor
+         */
+        init: function($surname, $name, $patronymic) {
+            var self = this;
+            self.$surname = $surname;
+            self.$name = $name;
+            self.$patronymic = $patronymic;
+            var fioParts = ["SURNAME", "NAME", "PATRONYMIC"];
+            // инициализируем подсказки на всех трех текстовых полях
+            // (фамилия, имя, отчество)
+            $.each([$surname, $name, $patronymic], function(index, $el) {
+                $el.suggestions({
+                    serviceUrl: DadataApi.DADATA_API_URL + "/suggest/fio",
+                    token: DadataApi.TOKEN,
+                    selectOnSpace: true,
+                    noCache: true,
+                    params: {
+                        // каждому полю --- соответствующая подсказка
+                        parts: [fioParts[index]]
+                    },
+                    onSearchStart: function(query) {
+                        // если пол известен на основании других полей,
+                        // используем его
+                        var $el = $(this);
+                        query.gender = self.isGenderKnown($el) ? self.gender : "UNKNOWN";
+                    },
+                    onSelect: function(suggestion) {
+                        // определяем пол по выбранной подсказке
+                        self.gender = suggestion.data.gender;
+                    }
+                });
+            });
+        },
+
+        /**
+         * Проверяет, известен ли пол на данный момент
+         * @param $el элемент, в котором находится фокус курсора
+         * @returns {boolean}
+         */
+        isGenderKnown: function($el) {
+            var self = this;
+            var surname = self.$surname.val(),
+                name = self.$name.val(),
+                patronymic = self.$patronymic.val();
+            console.log($el.attr('id') + '; ' + surname + '; ' + name + '; ' + patronymic);
+            if (($el.attr('id') == self.$surname.attr('id') && !name && !patronymic) ||
+                ($el.attr('id') == self.$name.attr('id') && !surname && !patronymic) ||
+                ($el.attr('id') == self.$patronymic.attr('id') && !surname && !name)) {
+                console.log('gender unknown');
+                return false;
+            } else {
+                console.log('gender known');
+                return true;
+            }
+        }
+    };
+
     window.AddressSuggestions = AddressSuggestions;
     window.FullnameSuggestions = FullnameSuggestions;
+    window.GranularFullnameSuggestions = GranularFullnameSuggestions;
 
 })();
