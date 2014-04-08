@@ -1,32 +1,23 @@
 /* Список подсказок */
 
 /* Выпадающий список подсказок */
-.autocomplete-suggestions {
-    background: #fff;
+.suggestions-wrapper .suggestions-suggestions {
     border: 1px solid #b3b9cb;
-    cursor: default;
-    max-height: 500px;
-    overflow: auto;
 }
-    /* Элемент списка */
-    .autocomplete-suggestion {
-        overflow: hidden;
-        padding: 2px 5px;
-        white-space: nowrap;
-    }
-    .autocomplete-suggestion-region {
+    .suggestions-wrapper .suggestions-suggestion-region {
         color: #999;
     }
     /* Разные стили для четных-нечетных элементов списка */
-    .autocomplete-suggestion:nth-child(even) {
+    .suggestions-wrapper .suggestions-suggestion:nth-child(even) {
         background: #f5f5f5;
     }
     /* Выделенный элемент списка */
-    .autocomplete-selected {
-        background: #f0f0f0;
+    .suggestions-wrapper .suggestions-selected,
+    .suggestions-wrapper .suggestions-suggestion:nth-child(even).suggestions-selected {
+        background: #ccc;
     }
     /* Подсветка совпадения в результатах поиска */
-    .autocomplete-suggestion strong {
+    .suggestions-wrapper .suggestions-suggestion strong {
         color: #3399FF;
         font-weight: normal;
     }
@@ -58,11 +49,6 @@
     input.suggestion-editable:focus {
         border-color: #ccc;
         box-shadow: none;
-    }
-    input#address-flat {
-        border: 1px solid #ccc;
-        padding-left: 4px;
-        padding-right: 4px;
     }
 
 /* Маркер для обязательных полей */

@@ -33,7 +33,7 @@
     $(function() {
         AddressSuggestions.init(
             $("#address"),
-            [$("#address-region"), $("#address-city"), $("#address-street"), $("#address-house")]
+            [$("#address-region"), $("#address-city"), $("#address-street"), $("#address-house"), $("#address-flat")]
         );
         FullnameSuggestions.init(
             $("#fullname"),
